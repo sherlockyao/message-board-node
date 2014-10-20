@@ -1,0 +1,21 @@
+{
+  "name": "message-board",
+  "version": "0.0.1",
+  "description": "message board server",
+  "main": "express.js",
+  "scripts": {
+    "start": "node express.js",
+    "test": "mocha express.test.js"
+  },
+  "author": "Sherlock Yao",
+  "dependencies": {
+    "body-parser": "1.0.2",
+    "express": "4.1.1",
+    "mongoose": "3.8.17",
+  },
+  "devDependencies": {
+    "expect.js": "0.3.1",
+    "mocha": "1.18.2",
+    "superagent": "0.17.0"
+  }
+}
