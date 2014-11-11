@@ -1,4 +1,4 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
 var BoardSchema = mongoose.Schema({
   id: String,
@@ -8,10 +8,10 @@ var BoardSchema = mongoose.Schema({
   lonMin: Number,
   lonMax: Number,
   messageCount: Number
-})
+});
 
 BoardSchema.methods = {
-}
+};
 
 BoardSchema.statics = {
   lookup : function(lat, lon, callback) {
@@ -20,9 +20,9 @@ BoardSchema.statics = {
       latMax: { $gt: lat },
       lonMin: { $lt: lon },
       lonMax: { $gt: lon }
-    }
-    this.findOne(query).exec(callback)
-  }  
-}
+    };
+    this.findOne(query).exec(callback);
+  };
+};
 
-mongoose.model('Board', BoardSchema)
+mongoose.model('Board', BoardSchema);

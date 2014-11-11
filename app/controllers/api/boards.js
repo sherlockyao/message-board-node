@@ -1,30 +1,30 @@
 var mongoose = require('mongoose')
   , Board = mongoose.model('Board')
-  , Message = mongoose.model('Message')
+  , Message = mongoose.model('Message');
 
 exports.lookup = function(req, res) {
   var lat = req.query.lat;
   var lon = req.query.lon;
   Board.lookup(lat, lon, function(err, board) {
     if (err || !board) {
-      res.status(400).send('Not found')
+      res.status(400).send('Not found');
     } else {
       Message.messagesOfBoard(board.id, function(err, messages) {
         var result = {
           board: board,
           messages: err ? [] : messages
-        }
-        res.send(result)
-      } 
+        };
+        res.send(result);
+      });
     }
-  })
-}  
+  });
+};  
 
 exports.create = function(req, res) {
-  var board = new Board(req.body)
+  var board = new Board(req.body);
   board.save(function(err) {
     if (err) {
-      res.status(
+      res.status(500).send('Database error');
     }
-  })
-} 
+  });
+}; 
