@@ -9,7 +9,7 @@ var MessageSchema = mongoose.Schema({
 
 MessageSchema.statics = {
   messagesOfBoard: function(boardId, callback) {
-    query = { boardId: boardId }
+    var query = { boardId: boardId }
     this.find(query).exec(callback)
   }
 }
