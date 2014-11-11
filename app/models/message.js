@@ -11,7 +11,7 @@ MessageSchema.statics = {
   messagesOfBoard: function(boardId, callback) {
     var query = { boardId: boardId };
     this.find(query).exec(callback);
-  };
+  }
 };
 
 mongoose.model('Message', MessageSchema);

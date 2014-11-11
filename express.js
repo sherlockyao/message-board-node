@@ -1,23 +1,28 @@
-var express = require('express')
-  , mongoskin = require('mongoskin')
-  , bodyParser = require('body-parser');
+var fs = require('fs')
+  , express = require('express')
+  , mongoose = require('mongoose')
+  , bodyParser = require('body-parser')
+  , config = require('./config/config');
 
 var app = express();
-app.use(bodyParser());
+var port = process.env.PORT || 3000;
 
-var db = mongoskin.db('mongodb://@localhost:27017/message_board_development', {safe: true});
+// Connect to mongodb
+var connect = function () {
+  var options = { server: { socketOptions: { keepAlive: 1 } } };
+  mongoose.connect(config.db, options);
+};
+connect();
+mongoose.connection.on('error', console.log);
+mongoose.connection.on('disconnected', connect);
 
-app.get('/board', function(req, res, next) {
-  var lat = req.query.lat;
-  var lon = req.query.lon;
-  if (lat && lon) {
-    db.collection('board').find({"lat": {$gte:10, $lte:100}, "lon" : {$gte:10, $lte:100}}).toArray(function(e, results) {
-      if (e) return next(e);
-      res.send(0 < results.length() ? results[0] : {});
-    });
-  } else {
-    res.send({});
-  }
+// Bootstrap models
+fs.readdirSync(__dirname + '/app/models').forEach(function (file) {
+  if (~file.indexOf('.js')) require(__dirname + '/app/models/' + file);
 });
 
-app.listen(3000);
+app.use(bodyParser());
+
+require('./config/routes')(app);
+
+app.listen(port);

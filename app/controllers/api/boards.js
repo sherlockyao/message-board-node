@@ -25,6 +25,11 @@ exports.create = function(req, res) {
   board.save(function(err) {
     if (err) {
       res.status(500).send('Database error');
+    } else {
+      var result = {
+        succuss: true
+      };
+      res.send(result);
     }
   });
 }; 

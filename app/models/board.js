@@ -22,7 +22,7 @@ BoardSchema.statics = {
       lonMax: { $gt: lon }
     };
     this.findOne(query).exec(callback);
-  };
+  }
 };
 
 mongoose.model('Board', BoardSchema);

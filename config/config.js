@@ -12,4 +12,4 @@ var defaults = {
 module.exports = {
   development: extend(development, defaults),
   production: extend(production, defaults)
-}[process.evn.NODE_ENV || 'development'];
+}[process.env.NODE_ENV || 'development'];
