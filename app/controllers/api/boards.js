@@ -7,9 +7,9 @@ exports.lookup = function(req, res) {
   var lon = req.query.lon;
   Board.lookup(lat, lon, function(err, board) {
     if (err || !board) {
-      res.status(400).send('Not found');
+      res.status(404).send('Not found');
     } else {
-      Message.messagesOfBoard(board.id, function(err, messages) {
+      Message.messagesOfBoard(board._id, function(err, messages) {
         var result = {
           board: board,
           messages: err ? [] : messages

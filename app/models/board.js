@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 var BoardSchema = mongoose.Schema({
-  id: String,
   title: String,
   latMin: Number,
   latMax: Number,
@@ -14,7 +13,7 @@ BoardSchema.methods = {
 };
 
 BoardSchema.statics = {
-  lookup : function(lat, lon, callback) {
+  lookup: function(lat, lon, callback) {
     var query = {
       latMin: { $lt: lat },
       latMax: { $gt: lat },
